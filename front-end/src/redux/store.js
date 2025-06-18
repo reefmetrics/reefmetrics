@@ -58,7 +58,8 @@ const initialState = {
   },
   logs: [],
   alerts: [],
-  instances: []
+  instances: [],
+  autotester_config: {}
 }
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk))
 export const configureStore = () => {

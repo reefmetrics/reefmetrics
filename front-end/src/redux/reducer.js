@@ -80,6 +80,8 @@ export const rootReducer = (state, action) => {
     case 'PH_PROBE_READING_COMPLETE':
       phReading[action.payload.id] = action.payload.reading
       return { ...state, ph_reading: { ...phReading } }
+    case 'AUTOTESTER_CONFIG_LOADED':
+      return { ...state, autotester_config: action.payload }
     case 'CAPABILITIES_LOADED':
       return { ...state, capabilities: action.payload }
     case 'SETTINGS_LOADED':

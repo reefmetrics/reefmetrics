@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/reef-pi/reef-pi/controller/modules/ato"
+	"github.com/reef-pi/reef-pi/controller/modules/autotester"
 	"github.com/reef-pi/reef-pi/controller/modules/camera"
 	"github.com/reef-pi/reef-pi/controller/modules/doser"
 	"github.com/reef-pi/reef-pi/controller/modules/equipment"
@@ -53,6 +54,15 @@ func (r *ReefPi) loadJournalSubsystem() error {
 		return nil
 	}
 	r.subsystems.Load(journal.Bucket, journal.New(r))
+	return nil
+}
+
+func (r *ReefPi) loadAutoTesterSubsystem() error {
+	if !r.settings.Capabilities.AutoTester {
+		return nil
+	}
+	at := autotester.New(r)
+	r.subsystems.Load(autotester.Bucket, at)
 	return nil
 }
 
@@ -184,6 +194,10 @@ func (r *ReefPi) loadSubsystems() error {
 	if err := r.loadJournalSubsystem(); err != nil {
 		log.Println("ERROR: Failed to load journal subsystem. Error:", err)
 		r.LogError("subsystem-journal", "Failed to load journal subsystem. Error:"+err.Error())
+	}
+	if err := r.loadAutoTesterSubsystem(); err != nil {
+		log.Println("ERROR: Failed to load autotester subsystem. Error:", err)
+		r.LogError("subsystem-autotester", "Failed to load autotester subsystem. Error:"+err.Error())
 	}
 	if err := r.subsystems.Setup(); err != nil {
 		log.Println("ERROR: Failed to setup subsystems. Error:", err)
