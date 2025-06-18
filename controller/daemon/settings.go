@@ -48,9 +48,13 @@ func (r *ReefPi) GetSettings(w http.ResponseWriter, req *http.Request) {
 }
 
 func (r *ReefPi) UpdateSettings(w http.ResponseWriter, req *http.Request) {
-	var s settings.Settings
-	fn := func(_ string) error {
-		return r.store.Update(Bucket, "settings", s)
-	}
-	utils.JSONUpdateResponse(&s, fn, w, req)
+        var s settings.Settings
+        fn := func(_ string) error {
+                if err := r.store.Update(Bucket, "settings", s); err != nil {
+                        return err
+                }
+                r.settings = s
+                return nil
+        }
+        utils.JSONUpdateResponse(&s, fn, w, req)
 }
