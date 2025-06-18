@@ -21,6 +21,7 @@ import ErrorBoundary from './ui_components/error_boundary'
 import i18n from 'utils/i18n'
 import Instances from 'instances/main'
 import Journal from 'journal/main'
+import AutoTester from 'autotester/main'
 
 
 const routes = [
@@ -36,6 +37,7 @@ const routes = [
   <Route key="camera" path="/camera" element={<Camera />} label={i18n.t('capabilities:camera')} />,
   <Route key="manager" path="/manager" element={<Instances />} label={i18n.t('capabilities:manager')} />,
   <Route key="journal" path="/journal" element={<Journal />} label={i18n.t('capabilities:journal')} />,
+  <Route key="autotester" path="/autotester" element={<AutoTester />} label={i18n.t('capabilities:autotester')} />,
   <Route key="configuration" path="/configuration/*" element={<Configuration />} label={i18n.t('capabilities:configuration')} />,
 ]
 

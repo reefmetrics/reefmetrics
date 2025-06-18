@@ -16,6 +16,7 @@ type Capabilities struct {
 	Macro         bool `json:"macro"`
 	Configuration bool `json:"configuration"`
 	Journal       bool `json:"journal"`
+	AutoTester    bool `json:"autotester"`
 }
 
 var DefaultCapabilities = Capabilities{
@@ -29,4 +30,5 @@ var DefaultCapabilities = Capabilities{
 	ATO:           true,
 	Configuration: true,
 	Macro:         true,
+	AutoTester:    false,
 }

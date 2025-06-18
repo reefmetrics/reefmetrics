@@ -4,6 +4,7 @@ import Capabilities from './capabilities'
 import Display from './display'
 import HealthNotify from './health_notify'
 import { updateSettings, fetchSettings } from 'redux/actions/settings'
+import { fetchUIData } from 'redux/actions/ui'
 import { connect } from 'react-redux'
 import SettingsSchema from './settings_schema'
 import i18n from 'utils/i18n'
@@ -169,6 +170,8 @@ class settings extends React.Component {
       settings = SettingsSchema.cast(settings)
       this.setState({ updated: false, settings: settings })
       this.props.updateSettings(settings)
+      this.props.fetchSettings()
+      this.props.fetchUIData()
       showUpdateSuccessful()
       return
     }
@@ -326,7 +329,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchSettings: () => dispatch(fetchSettings()),
-    updateSettings: s => dispatch(updateSettings(s))
+    updateSettings: s => dispatch(updateSettings(s)),
+    fetchUIData: () => dispatch(fetchUIData(dispatch))
   }
 }
 
